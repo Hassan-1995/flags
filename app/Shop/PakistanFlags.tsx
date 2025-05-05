@@ -4,31 +4,31 @@ import ShoppingCard from "../components/ShoppingCard";
 const PakistanFlags = () => {
   const PakistanFlagsWithRangePrice = [
     {
-      href: "/product/1",
+      href: "/Shop/1",
       imageSrc: "/Pakistan_Flag.png",
       title: "Pakistan Flag Digital Printed – Without Stand",
       price: { min: 400, max: 5700 },
     },
     {
-      href: "/product/2",
+      href: "/Shop/2",
       imageSrc: "/Pakistan_Flag_Hard_Finish_With_Stand.png",
       title: "Pakistan Flag Digital Printed Hard Finish – With Stand",
       price: { min: 400, max: 5700 },
     },
     {
-      href: "/product/3",
+      href: "/Shop/3",
       imageSrc: "/Pakistan_Flag_Hard_Finish_Without_Stand.png",
       title: "Pakistan Flag Digital Printed Hard Finish – Without Stand",
       price: { min: 400, max: 5700 },
     },
     {
-      href: "/product/4",
+      href: "/Shop/4",
       imageSrc: "/Pakistan_Table_Flag_Marble.png",
       title: "Pakistan Table Flag Stand Marble Base",
       price: { min: 400, max: 5700 },
     },
     {
-      href: "/product/5",
+      href: "/Shop/5",
       imageSrc: "/Pakistan_Table_Flag_Steel.png",
       title: "Pakistan Table Flag Stand Steel Base",
       price: 400,
