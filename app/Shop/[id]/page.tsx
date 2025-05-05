@@ -1,10 +1,6 @@
+"use client";
 import Image from "next/image";
-import { notFound } from "next/navigation";
-import React from "react";
-
-interface Props {
-  params: { id: string };
-}
+import { notFound, useParams } from "next/navigation";
 
 const allProducts = [
   {
@@ -44,7 +40,8 @@ const allProducts = [
   },
 ];
 
-const ProductDetailPage = ({ params }: Props) => {
+const ProductDetailPage = () => {
+  const params = useParams(); // Access the params asynchronously
   const product = allProducts.find((item) => item.id === params.id);
 
   if (!product) {
@@ -76,9 +73,7 @@ const ProductDetailPage = ({ params }: Props) => {
               ? `Rs. ${product.price.min} - Rs. ${product.price.max}`
               : `Rs. ${product.price}`}
           </p>
-
           <hr className="border-t border-gray-300" />
-
           <p className="text-sm sm:text-base text-slate-600 leading-loose">
             ✅ 100% Original product <br />
             💸 Cash on delivery available <br />
