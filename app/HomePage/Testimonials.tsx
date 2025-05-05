@@ -35,9 +35,9 @@ const Testimonials = () => {
                   ))}
               </div>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                "The quality of VIP FLAGS' products is exceptional. We ordered
-                custom flags for our corporate event, and they exceeded our
-                expectations."
+                &quot;The quality of VIP FLAGS&apos; products is exceptional. We
+                ordered custom flags for our corporate event, and they exceeded
+                our expectations.&quot;
               </p>
               <div className="font-semibold text-slate-800">
                 - Ahmed Khan, Event Manager
@@ -55,8 +55,8 @@ const Testimonials = () => {
                   ))}
               </div>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                "Fast delivery and impeccable craftsmanship. The attention to
-                detail on our custom-designed flags was remarkable."
+                &quot;Fast delivery and impeccable craftsmanship. The attention
+                to detail on our custom-designed flags was remarkable.&quot;
               </p>
               <div className="font-semibold text-slate-800">
                 - Fatima Malik, School Principal
@@ -75,9 +75,9 @@ const Testimonials = () => {
                 <LuStarHalf className="h-5 w-5 fill-current" />
               </div>
               <p className="text-gray-600 mb-4 leading-relaxed">
-                "We've been ordering our national flags from VIP FLAGS for
-                years. Their durability and color retention are unmatched in the
-                market."
+                &quot;We&apos;ve been ordering our national flags from VIP FLAGS
+                for years. Their durability and color retention are unmatched in
+                the market.&quot;
               </p>
               <div className="font-semibold text-slate-800">
                 - Zain Ali, Government Official
