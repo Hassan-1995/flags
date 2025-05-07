@@ -1,6 +1,5 @@
 "use client";
 import DropDownBox from "@/app/components/DropDownBox";
-import Image from "next/image";
 import { notFound, useParams, useSearchParams } from "next/navigation";
 import ShowPakistanFlag from "./ShowPakistanFlag";
 import ShowWorldFlag from "./ShowWorldFlag";
