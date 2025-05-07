@@ -2,6 +2,8 @@
 import DropDownBox from "@/app/components/DropDownBox";
 import Image from "next/image";
 import { notFound, useParams, useSearchParams } from "next/navigation";
+import ShowPakistanFlag from "./ShowPakistanFlag";
+import ShowWorldFlag from "./ShowWorldFlag";
 
 const ProductDetailPage = () => {
   const params = useParams();
@@ -10,6 +12,7 @@ const ProductDetailPage = () => {
   const imageSrc = searchParams.get("imageSrc");
   const description = searchParams.get("description");
   const price = searchParams.get("price");
+  const worldFlag = searchParams.get("worldFlag");
 
   const sizeOptions = [
     { key: "1", value: "36 x 56 inch", price: 5700 },
@@ -32,19 +35,15 @@ const ProductDetailPage = () => {
   }
 
   return (
-    <div className="px-4 py-10 max-w-screen-xl mx-auto">
+    <div className="px-4 py-10 max-w-screen-xl bg-zinc-100">
       <div className="flex flex-col lg:flex-row gap-10">
-        <div className="flex-shrink-0 w-full lg:w-[50%]">
-          <Image
-            src={imageSrc!}
-            alt={title!}
-            width={500}
-            height={500}
-            priority
-            className="object-contain w-full h-[250px] sm:h-[350px] md:h-[400px] lg:h-[500px] rounded shadow"
-          />
+        <div className="flex-shrink-0 lg:w-[50%]">
+          {worldFlag === "true" ? (
+            <ShowWorldFlag title={title!} />
+          ) : (
+            <ShowPakistanFlag image={imageSrc!} title={title!} />
+          )}
         </div>
-
         <div className="flex-1 space-y-6">
           <h1 className="text-2xl sm:text-3xl font-bold">{title}</h1>
           <p className="text-base sm:text-lg text-gray-700">{description}</p>

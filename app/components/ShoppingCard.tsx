@@ -9,6 +9,7 @@ type ShoppingCardProps = {
   title: string;
   description: string;
   price: number | { min: number; max: number };
+  worldFlag: boolean;
 };
 
 const ShoppingCard = ({
@@ -17,6 +18,7 @@ const ShoppingCard = ({
   title,
   description,
   price,
+  worldFlag,
 }: ShoppingCardProps) => {
   const formatPrice = () => {
     if (typeof price === "number") {
@@ -36,6 +38,7 @@ const ShoppingCard = ({
             imageSrc,
             description,
             price: typeof price === "number" ? price : JSON.stringify(price),
+            worldFlag,
           },
         }}
         className="flex flex-col flex-grow h-full"

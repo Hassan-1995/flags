@@ -8,6 +8,7 @@ const WorldFlags = () => {
       <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {worldFlagShop.map((product, index) => (
           <ShoppingCard
+            worldFlag={true}
             key={index}
             href={`/Shop/${product.id}`}
             imageSrc={product.imageSrc}
