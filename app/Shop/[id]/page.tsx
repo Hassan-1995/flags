@@ -1,51 +1,34 @@
 "use client";
+import DropDownBox from "@/app/components/DropDownBox";
 import Image from "next/image";
-import { notFound, useParams } from "next/navigation";
-
-const allProducts = [
-  {
-    id: "1",
-    imageSrc: "/Pakistan_Flag.png",
-    title: "Pakistan Flag Digital Printed – Without Stand",
-    description: "High-quality digital printed flag without a stand.",
-    price: { min: 400, max: 5700 },
-  },
-  {
-    id: "2",
-    imageSrc: "/Pakistan_Flag_Hard_Finish_With_Stand.png",
-    title: "Pakistan Flag Digital Printed Hard Finish – With Stand",
-    description: "Premium hard finish flag with sturdy stand.",
-    price: { min: 400, max: 5700 },
-  },
-  {
-    id: "3",
-    imageSrc: "/Pakistan_Flag_Hard_Finish_Without_Stand.png",
-    title: "Pakistan Flag Digital Printed Hard Finish – Without Stand",
-    description: "Hard finish flag for display without base.",
-    price: { min: 400, max: 5700 },
-  },
-  {
-    id: "4",
-    imageSrc: "/Pakistan_Table_Flag_Marble.png",
-    title: "Pakistan Table Flag Stand Marble Base",
-    description: "Elegant marble-based table flag.",
-    price: { min: 400, max: 5700 },
-  },
-  {
-    id: "5",
-    imageSrc: "/Pakistan_Table_Flag_Steel.png",
-    title: "Pakistan Table Flag Stand Steel Base",
-    description: "Sleek steel base flag stand.",
-    price: 400,
-  },
-];
+import { notFound, useParams, useSearchParams } from "next/navigation";
 
 const ProductDetailPage = () => {
-  const params = useParams(); // Access the params asynchronously
-  const product = allProducts.find((item) => item.id === params.id);
+  const params = useParams();
+  const searchParams = useSearchParams();
+  const title = searchParams.get("title");
+  const imageSrc = searchParams.get("imageSrc");
+  const description = searchParams.get("description");
+  const price = searchParams.get("price");
 
-  if (!product) {
+  const sizeOptions = [
+    { key: "1", value: "36 x 56 inch", price: 5700 },
+    { key: "2", value: "24 x 36 inch", price: 2300 },
+    { key: "3", value: "6 x 9 inch", price: 400 },
+  ];
+
+  if (!params.id) {
     notFound();
+  }
+
+  let finalPrice;
+  try {
+    finalPrice =
+      typeof price === "string" && price.includes("{")
+        ? JSON.parse(price)
+        : Number(price);
+  } catch {
+    finalPrice = null;
   }
 
   return (
@@ -53,8 +36,8 @@ const ProductDetailPage = () => {
       <div className="flex flex-col lg:flex-row gap-10">
         <div className="flex-shrink-0 w-full lg:w-[50%]">
           <Image
-            src={product.imageSrc}
-            alt={product.title}
+            src={imageSrc!}
+            alt={title!}
             width={500}
             height={500}
             priority
@@ -63,16 +46,18 @@ const ProductDetailPage = () => {
         </div>
 
         <div className="flex-1 space-y-6">
-          <h1 className="text-2xl sm:text-3xl font-bold">{product.title}</h1>
-          <p className="text-base sm:text-lg text-gray-700">
-            {product.description}
-          </p>
+          <h1 className="text-2xl sm:text-3xl font-bold">{title}</h1>
+          <p className="text-base sm:text-lg text-gray-700">{description}</p>
           <p className="text-xl sm:text-2xl font-bold text-green-700">
             Price:{" "}
-            {typeof product.price === "object"
-              ? `Rs. ${product.price.min} - Rs. ${product.price.max}`
-              : `Rs. ${product.price}`}
+            {typeof finalPrice === "object"
+              ? `Rs. ${finalPrice.min} - Rs. ${finalPrice.max}`
+              : `Rs. ${finalPrice}`}
           </p>
+          <hr className="border-t border-gray-300" />
+          <div>
+            <DropDownBox title={"Pick a Flag Size"} options={sizeOptions} />
+          </div>
           <hr className="border-t border-gray-300" />
           <p className="text-sm sm:text-base text-slate-600 leading-loose">
             ✅ 100% Original product <br />

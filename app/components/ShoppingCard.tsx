@@ -7,10 +7,17 @@ type ShoppingCardProps = {
   href: string;
   imageSrc: string;
   title: string;
+  description: string;
   price: number | { min: number; max: number };
 };
 
-const ShoppingCard = ({ href, imageSrc, title, price }: ShoppingCardProps) => {
+const ShoppingCard = ({
+  href,
+  imageSrc,
+  title,
+  description,
+  price,
+}: ShoppingCardProps) => {
   const formatPrice = () => {
     if (typeof price === "number") {
       return `Rs: ${price.toLocaleString()}`;
@@ -21,7 +28,18 @@ const ShoppingCard = ({ href, imageSrc, title, price }: ShoppingCardProps) => {
 
   return (
     <Card className="overflow-hidden m-4 hover:shadow-md hover:shadow-green-600 hover:scale-105 transition-all flex flex-col">
-      <Link href={href} className="flex flex-col flex-grow h-full">
+      <Link
+        href={{
+          pathname: href,
+          query: {
+            title,
+            imageSrc,
+            description,
+            price: typeof price === "number" ? price : JSON.stringify(price),
+          },
+        }}
+        className="flex flex-col flex-grow h-full"
+      >
         <div className="relative h-[200px] overflow-hidden group">
           <Image
             src={imageSrc}
