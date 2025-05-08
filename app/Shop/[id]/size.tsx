@@ -1,3 +1,9 @@
+type sizeOption = {
+  key: string;
+  value: string;
+  price: number;
+};
+
 const PakistanFlagDigitalPrintedWithoutStand = [
   { key: "1", value: "36 x 56 inch", price: 5700 },
   { key: "2", value: "24 x 36 inch", price: 2300 },
@@ -48,7 +54,7 @@ const WorldTableFlagStandSteelBase = [
   { key: "2", value: "Small", price: 600 },
 ];
 
-export const sizeOptionsMap: Record<string, any[]> = {
+export const sizeOptionsMap: Record<string, sizeOption[]> = {
   PakistanFlagDigitalPrintedWithoutStand,
   PakistanFlagDigitalPrintedHardFinishWithStand,
   PakistanFlagDigitalPrintedHardFinishWithoutStand,
