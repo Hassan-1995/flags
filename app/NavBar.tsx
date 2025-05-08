@@ -58,7 +58,7 @@ const NavBar = () => {
 
       <div className="hidden lg:flex space-x-2">
         <Link
-          href="/"
+          href="/Cart"
           className="inline-flex items-center justify-center relative p-2"
         >
           <LuShoppingCart size={30} color="green" />

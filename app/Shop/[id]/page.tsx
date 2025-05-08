@@ -77,7 +77,10 @@ const ProductDetailPage = () => {
       newCart.push({
         id: String(params.id),
         name: title ?? "",
-        image: (worldFlag == "true" ? countryCode : imageSrc) ?? "",
+        image:
+          (worldFlag == "true"
+            ? `https://flagcdn.com/w320/${countryCode.toLowerCase()}.png`
+            : imageSrc) ?? "",
         price: cost!,
         size: dimension!,
         quantity: 1,
@@ -85,7 +88,7 @@ const ProductDetailPage = () => {
     }
 
     localStorage.setItem("cart", JSON.stringify(newCart));
-    setCart(newCart); // update state
+    setCart(newCart);
 
     console.log(newCart);
     setTimeout(() => setShowAdded(false), 3000);
@@ -105,6 +108,7 @@ const ProductDetailPage = () => {
           )}
         </div>
         <div className="flex-1 space-y-6">
+          {/* <h1 className="text-2xl sm:text-3xl font-bold">{cart.name}</h1> */}
           <h1 className="text-2xl sm:text-3xl font-bold">{title}</h1>
           <p className="text-base sm:text-lg text-gray-700">{description}</p>
           <p className="text-xl sm:text-2xl font-bold text-green-700">
