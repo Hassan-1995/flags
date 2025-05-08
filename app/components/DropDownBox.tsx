@@ -9,14 +9,16 @@ type OptionType = {
 type DropDownContent = {
   title: string;
   options: OptionType[];
+  sendSize: (selected: OptionType) => void;
 };
 
-const DropDownBox = ({ title, options }: DropDownContent) => {
+const DropDownBox = ({ title, options, sendSize }: DropDownContent) => {
   const [selectedOption, setSelectedOption] = useState<OptionType | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = options.find((opt) => opt.key === e.target.value);
     setSelectedOption(selected || null);
+    sendSize(selected!);
   };
   return (
     <div>

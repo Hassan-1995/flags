@@ -1,15 +1,24 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { FiChevronLeft, FiMenu, FiX } from "react-icons/fi";
-import { LuFlag } from "react-icons/lu";
+import { LuFlag, LuShoppingCart } from "react-icons/lu";
 import Button from "./components/Button";
 
 const NavBar = () => {
   const currentPath = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [cartItem, setCartItem] = useState(0);
+
+  useEffect(() => {
+    if (!localStorage.getItem("cart")) {
+      localStorage.setItem("cart", JSON.stringify([]));
+    }
+    const cart = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCartItem(cart.length);
+  }, [cartItem]);
 
   const mainLinks = [
     { label: "Home", href: "/" },
@@ -48,6 +57,16 @@ const NavBar = () => {
       </ul>
 
       <div className="hidden lg:flex space-x-2">
+        <Link
+          href="/"
+          className="inline-flex items-center justify-center relative p-2"
+        >
+          <LuShoppingCart size={30} color="green" />
+
+          {cartItem > 0 && (
+            <div className="bg-red-500 w-3 h-3 rounded-xl absolute top-1 right-1" />
+          )}
+        </Link>
         <Button
           text="Get a Quote"
           size="md"

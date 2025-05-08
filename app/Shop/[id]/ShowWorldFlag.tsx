@@ -4,13 +4,15 @@ import countryFlags from "./countries.json";
 
 type ShowWorldFlagProps = {
   title: string;
+  sendFlagCode: (URL: string) => void;
 };
 
-const ShowWorldFlag = ({ title }: ShowWorldFlagProps) => {
+const ShowWorldFlag = ({ title, sendFlagCode }: ShowWorldFlagProps) => {
   const [selectedCountry, setSelectedCountry] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCountry(e.target.value);
+    sendFlagCode(e.target.value);
   };
 
   return (
