@@ -15,6 +15,7 @@ const PakistanFlags = () => {
             title={product.title}
             description={product.description}
             price={product.price}
+            sizeOption={product.title.replace(/[\s–]+/g, "")}
           />
         ))}
       </div>

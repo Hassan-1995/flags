@@ -3,6 +3,8 @@ import DropDownBox from "@/app/components/DropDownBox";
 import { notFound, useParams, useSearchParams } from "next/navigation";
 import ShowPakistanFlag from "./ShowPakistanFlag";
 import ShowWorldFlag from "./ShowWorldFlag";
+import { sizeOptionsMap } from "./size";
+import Button from "@/app/components/Button";
 
 const ProductDetailPage = () => {
   const params = useParams();
@@ -11,17 +13,15 @@ const ProductDetailPage = () => {
   const imageSrc = searchParams.get("imageSrc");
   const description = searchParams.get("description");
   const price = searchParams.get("price");
+  const sizeOptionKey = searchParams.get("sizeOption");
   const worldFlag = searchParams.get("worldFlag");
-
-  const sizeOptions = [
-    { key: "1", value: "36 x 56 inch", price: 5700 },
-    { key: "2", value: "24 x 36 inch", price: 2300 },
-    { key: "3", value: "6 x 9 inch", price: 400 },
-  ];
 
   if (!params.id) {
     notFound();
   }
+
+  const sizeOptionToUse =
+    sizeOptionsMap[sizeOptionKey as keyof typeof sizeOptionsMap];
 
   let finalPrice;
   try {
@@ -54,7 +54,18 @@ const ProductDetailPage = () => {
           </p>
           <hr className="border-t border-gray-300" />
           <div>
-            <DropDownBox title={"Pick a Flag Size"} options={sizeOptions} />
+            <DropDownBox title={"Pick a Flag Size"} options={sizeOptionToUse} />
+          </div>
+          <div className="flex justify-end-safe">
+            <Button
+              text="Buy Now"
+              size="md"
+              textColor="text-white"
+              bgColor="bg-green-600"
+              hoverColor="hover:bg-zinc-400"
+              onClick={() => alert("Medium clicked")}
+              //   href="/"
+            />
           </div>
           <hr className="border-t border-gray-300" />
           <p className="text-sm sm:text-base text-slate-600 leading-loose">
