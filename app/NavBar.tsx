@@ -24,7 +24,7 @@ const NavBar = () => {
     { label: "Home", href: "/" },
     { label: "Shop", href: "/Shop" },
     { label: "Products Gallery", href: "/productsGallery" },
-    { label: "Contact Us", href: "/contactUs" },
+    { label: "Contact Us", href: "/ContactUs" },
   ];
 
   const handleClick = (item: string) => {
