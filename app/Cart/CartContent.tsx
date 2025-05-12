@@ -1,62 +1,79 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import { useEffect, useState } from "react";
+import { LuTrash2 } from "react-icons/lu";
 
 type CartItem = {
   image: string;
-  title: string;
+  name: string;
   quantity: number;
   size: string;
   price: number | 0;
 };
 
-const CartContent = ({ image, title, quantity, size, price }: CartItem) => {
+const CartContent = () => {
+  const [cart, setCart] = useState<CartItem[]>([]);
+  useEffect(() => {
+    const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCart(storedCart);
+  }, []);
+
+  const handleDelete = (index: number) => {
+    const updatedCart = cart.filter((_, i) => i !== index);
+    setCart(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
   return (
-    // <div className="flex flex-wrap items-center justify-between gap-4 p-4 border-b">
-    //   <div className="flex items-center gap-4 w-full sm:w-1/3">
-    //     <div className="relative bg-zinc-300 h-20 w-28 flex-shrink-0 rounded overflow-hidden">
-    //       <Image
-    //         src={image}
-    //         alt={title}
-    //         fill
-    //         className="object-cover transition-transform duration-300 ease-in-out hover:scale-105"
-    //       />
-    //     </div>
-    //     <h1 className="text-lg font-semibold text-zinc-800">{title}</h1>
-    //   </div>
-    //   <h1 className="text-zinc-600 w-1/4 sm:w-1/6 text-center">{quantity}</h1>
-
-    //   <h1 className="text-zinc-600 w-1/4 sm:w-1/6 text-center">{price}</h1>
-
-    //   <h1 className="text-zinc-800 font-medium w-full sm:w-1/6 text-right sm:text-center">
-    //     {(quantity * price).toLocaleString()}
-    //   </h1>
-    // </div>
-
-    <div className="flex flex-wrap items-center justify-between gap-4 p-4 border-b">
-      <div className="flex items-center gap-4 w-full sm:w-1/3 lg:w-1/4">
-        <div className="relative w-28 h-20 flex-shrink-0 rounded overflow-hidden">
-          <Image
-            src={image}
-            alt={title}
-            fill
-            className="object-cover transition-transform duration-300 ease-in-out hover:scale-105"
-          />
+    <>
+      {cart.map((item, index) => (
+        <div
+          key={index}
+          className="bg-zinc-100 px-5 border-t-2 border-b-2 flex w-full mt-1 justify-center"
+        >
+          <div className="lg:flex lg:w-1/3 md:w-3/4 w-1/2">
+            <div className="relative rounded overflow-hidden lg:w-1/2 h-50 lg:h-30 p-2 flex items-center justify-center">
+              <Image
+                src={item.image}
+                alt={item.name}
+                fill
+                className="object-cover transition-transform duration-300 ease-in-out"
+              />
+            </div>
+            <h1 className="lg:w-1/2 p-2 font-semibold flex items-center border-r-2">
+              {item.name}
+            </h1>
+          </div>
+          <div className="w-1/12 p-1 hidden lg:flex items-center justify-end border-r-2">
+            <h1 className="font-bold">{item.quantity}</h1>
+          </div>
+          <div className="w-1/12 p-1 hidden lg:flex items-center justify-end border-r-2">
+            <h1>{item.price.toLocaleString()}</h1>
+          </div>
+          <div className="w-1/3 p-1 flex flex-col md:flex items-center justify-center border-r-2">
+            <h1>{item.size}</h1>
+            <h1 className="md:hidden">
+              Rs: {(item.quantity * item.price).toLocaleString()}
+            </h1>
+          </div>
+          <div className="w-1/6 p-1 hidden md:flex items-center justify-end border-r-2 font-bold">
+            Rs:{" "}
+            <h1 className="font-normal">
+              {" "}
+              {(item.quantity * item.price).toLocaleString()}
+            </h1>
+          </div>
+          <div className="w-1/6 p-1 flex flex-col items-center justify-center border-r-2">
+            <button
+              onClick={() => handleDelete(index)}
+              className="text-red-600 px-2 py-1 rounded hover:text-red-800"
+            >
+              <LuTrash2 size={30} />
+            </button>
+          </div>
         </div>
-        <h1 className="text-zinc-600 font-semibold">{title}</h1>
-      </div>
-      <h1 className="text-zinc-600 font-semibold w-1/4 sm:w-1/6 text-center">
-        {quantity}
-      </h1>
-      <h1 className="text-zinc-600 font-semibold w-1/4 sm:w-1/6 text-center">
-        {price}
-      </h1>
-      <h1 className="text-zinc-600 font-semibold w-1/4 sm:w-1/6 text-center">
-        {size}
-      </h1>
-      <h1 className="text-zinc-800 font-semibold w-full sm:w-1/6 lg:w-1/6 text-right sm:text-center">
-        {quantity * price}
-      </h1>
-    </div>
+      ))}
+    </>
   );
 };
 
