@@ -50,7 +50,7 @@ const CartContent = () => {
           <div className="w-1/12 p-1 hidden lg:flex items-center justify-end border-r-2">
             <h1>{item.price.toLocaleString()}</h1>
           </div>
-          <div className="w-1/3 p-1 flex flex-col md:flex items-center justify-center border-r-2">
+          <div className="w-1/6 p-1 flex flex-col md:flex items-center justify-center border-r-2">
             <h1>{item.size}</h1>
             <h1 className="md:hidden">
               Rs: {(item.quantity * item.price).toLocaleString()}

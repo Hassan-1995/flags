@@ -1,35 +1,7 @@
-"use client";
-import { useState } from "react";
 import { LuMail, LuMapPin, LuPhone } from "react-icons/lu";
-
-type FormData = {
-  name: string;
-  email: string;
-  phone: string;
-  message: string;
-};
+import ContactForm from "./ContactForm";
 
 const ContactUs = () => {
-  const [formData, setFormData] = useState<FormData>({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-  });
-
-  const handleChange = (e: { target: { name: string; value: string } }) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
-  };
-
-  const handleSubmit = (e: { preventDefault: () => void }) => {
-    e.preventDefault();
-    console.log("Form submitted:", formData);
-    setFormData({ name: "", email: "", phone: "", message: "" });
-  };
-
   return (
     <div className="bg-zinc-100 container mx-auto px-4 py-12">
       <div className="text-center mb-12">
@@ -40,55 +12,9 @@ const ContactUs = () => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Contact Form */}
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
           <h2 className="text-xl font-semibold mb-6">Send us a message</h2>
-          <form
-            onSubmit={handleSubmit}
-            className="max-w-md mx-auto p-4 space-y-4"
-          >
-            <input
-              name="name"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
-              required
-            />
-            <input
-              name="email"
-              placeholder="Your Email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
-              required
-            />
-            <input
-              name="phone"
-              placeholder="Phone Number"
-              type="tel"
-              value={formData.phone}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
-              required
-            />
-            <textarea
-              name="message"
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={handleChange}
-              className="w-full border border-gray-300 p-2 rounded"
-              rows={4}
-              required
-            ></textarea>
-            <button
-              type="submit"
-              className="bg-green-500 w-full text-white px-4 py-2 rounded-xl hover:bg-green-600"
-            >
-              Submit
-            </button>
-          </form>
+          <ContactForm />
         </div>
 
         <div className="bg-gray-50 p-6 rounded-lg">

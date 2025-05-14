@@ -4,7 +4,7 @@ const CartPage = () => {
   return (
     <>
       <div className="hidden lg:flex bg-green-400 px-5 h-10 w-full justify-center items-center">
-        <div className="lg:flex  w-1/3 ">
+        <div className="lg:flex  lg:w-1/3 ">
           <div className="w-1/2">
             <h1 className="font-bold flex justify-center">Image</h1>
           </div>
