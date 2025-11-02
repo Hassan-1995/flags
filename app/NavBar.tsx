@@ -134,19 +134,19 @@ const NavBar = () => {
               title="Cart"
               onClick={() => handleClick("/Cart")}
               textColor="text-white"
-              bgColor="bg-green-600"
+              bgColor="bg-green-500"
             />
             <NavButton
               title="Get a Quote"
               onClick={() => handleClick("/")}
-              textColor="text-black"
+              textColor="text-green-900"
               bgColor="bg-white"
             />
             <NavButton
               title="Shop Now"
               onClick={() => handleClick("/Shop")}
               textColor="text-white"
-              bgColor="bg-black"
+              bgColor="bg-green-900"
             />
           </div>
         </ul>
