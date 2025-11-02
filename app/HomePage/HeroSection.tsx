@@ -21,7 +21,7 @@ const HeroSection = () => {
           <h1 className="text-4xl font-bold tracking-tighter sm:text-5xl md:text-6xl">
             VIP FLAGS
           </h1>
-          <p className="mt-4 text-xl md:text-2xl font-medium">
+          <p className="mt-4 text-xl md:text-2xl font-medium italic">
             Pride in Every Stitch
           </p>
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -29,16 +29,16 @@ const HeroSection = () => {
               text="Shop Now"
               size="xl"
               textColor="text-white"
-              bgColor="bg-green-600"
-              hoverColor="hover:bg-green-700"
+              bgColor="bg-green-900"
+              hoverColor="hover:bg-white hover:text-green-500"
               href="/"
             />
             <Button
               text="Get a Quote"
               size="xl"
-              textColor="text-white"
+              textColor="text-green-500"
               bgColor="bg-tranparent"
-              hoverColor="hover:bg-zinc-400"
+              hoverColor="hover:bg-green-500 hover:text-white"
               onClick={() => alert("Extra Large clicked")}
               //   href="/"
             />

@@ -40,9 +40,9 @@ const ProductsSection = () => {
               <Button
                 className="w-full"
                 text="Shop National Flag"
-                textColor="text-white"
-                bgColor="bg-black"
-                hoverColor="hover:bg-zinc-800"
+                textColor="text-green-900"
+                bgColor="bg-white"
+                hoverColor="hover:bg-green-500 hover:text-white"
               />
             </CardContent>
           </Card>
@@ -59,9 +59,9 @@ const ProductsSection = () => {
               <Button
                 className="w-full"
                 text="Shop Corporate Flags"
-                textColor="text-white"
-                bgColor="bg-black"
-                hoverColor="hover:bg-zinc-800"
+                textColor="text-green-900"
+                bgColor="bg-white"
+                hoverColor="hover:bg-green-500 hover:text-white"
               />
             </CardContent>
           </Card>
@@ -78,20 +78,21 @@ const ProductsSection = () => {
               <Button
                 className="w-full"
                 text="Shop Accessories"
-                textColor="text-white"
-                bgColor="bg-black"
-                hoverColor="hover:bg-zinc-800"
+                textColor="text-green-900"
+                bgColor="bg-white"
+                hoverColor="hover:bg-green-500 hover:text-white"
               />
             </CardContent>
           </Card>
         </div>
         <div className="mt-12 text-center flex justify-center ">
           <Button
-            className="w-2/5"
+            size="xl"
+            className="w-full md:w-2/5"
             text="View Full Gallery"
             textColor="text-white"
-            bgColor="bg-black"
-            hoverColor="hover:bg-zinc-800"
+            bgColor="bg-green-900"
+            hoverColor="hover:bg-white hover:text-green-500"
           />
         </div>
       </div>

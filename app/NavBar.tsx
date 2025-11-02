@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 import { FiChevronLeft, FiMenu, FiX } from "react-icons/fi";
 import { LuFlag, LuShoppingCart } from "react-icons/lu";
@@ -33,7 +34,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="flex bg-white w-screen items-center justify-between px-6 py-4 border-b shadow-sm">
+    <nav className="flex bg-white w-screen items-center justify-between px-6 h-20 border-b shadow-sm">
       <Link href="/" className="flex items-center z-10">
         <LuFlag
           size={30}
@@ -77,7 +78,7 @@ const NavBar = () => {
             title="Get a Qoute"
             onClick={() => handleClick("/")}
             size="md"
-            textColor="text-black"
+            textColor="text-green-900"
             bgColor="bg-white"
             hoverColor="hover:bg-green-600 hover:text-white"
           />
@@ -86,8 +87,8 @@ const NavBar = () => {
             onClick={() => handleClick("/Shop")}
             size="md"
             textColor="text-white"
-            bgColor="bg-black"
-            hoverColor="hover:bg-white hover:text-green-600"
+            bgColor="bg-green-900"
+            hoverColor="hover:bg-white hover:text-green-900"
           />
         </div>
       </div>
@@ -170,17 +171,12 @@ const NavButton = ({
   title,
   onClick,
   size = "md",
-  textColor = "text-black",
-  bgColor = "bg-blue-500",
-  hoverColor = "hover:bg-blue-600",
+  textColor = "text-white",
+  bgColor = "bg-gradient-to-r from-green-600 to-emerald-700",
+  hoverColor = "hover:from-emerald-700 hover:to-green-600",
   className = "",
 }: NavButtonProps) => {
   let sizeClasses = "";
-  const handleClick = () => {
-    console.log(title);
-    onClick();
-  };
-
   switch (size) {
     case "sm":
       sizeClasses = "px-3 py-1 text-sm";
@@ -191,15 +187,30 @@ const NavButton = ({
     case "xl":
       sizeClasses = "px-9 py-4 text-xl";
       break;
-    case "md":
     default:
       sizeClasses = "px-4 py-2 text-base";
   }
 
-  const combinedClasses = `font-semibold rounded-xl border-2 border-zinc-600 ${textColor} ${bgColor} ${hoverColor} ${sizeClasses} flex items-center justify-center ${className}`;
+  const combinedClasses = `
+  ${bgColor} ${hoverColor} ${textColor} 
+  font-semibold rounded-xl border border-green-700/30 
+  shadow-md shadow-green-900/10
+  transition-all duration-300 ease-out
+  cursor-pointer
+  ${sizeClasses} ${className}
+`;
+
   return (
-    <button className={combinedClasses} onClick={handleClick}>
+    <motion.button
+      whileHover={{
+        scale: 1.05,
+        boxShadow: "0px 4px 20px rgba(34, 197, 94, 0.4)",
+      }}
+      whileTap={{ scale: 0.97 }}
+      className={combinedClasses}
+      onClick={onClick}
+    >
       {title}
-    </button>
+    </motion.button>
   );
 };

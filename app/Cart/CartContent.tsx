@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { LuTrash2 } from "react-icons/lu";
+import Button from "../components/Button";
 
 type CartItem = {
   image: string;
@@ -13,6 +14,7 @@ type CartItem = {
 
 const CartContent = () => {
   const [cart, setCart] = useState<CartItem[]>([]);
+
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
     setCart(storedCart);
@@ -24,56 +26,113 @@ const CartContent = () => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
+  const subtotal = cart.reduce(
+    (acc, item) => acc + item.price * item.quantity,
+    0
+  );
+
+  if (cart.length === 0)
+    return (
+      <div className="text-center mt-10">
+        <h2 className="text-xl font-semibold mb-4">Your cart is empty 🛒</h2>
+        <Button
+          text="Continue Shopping"
+          href="/"
+          bgColor="bg-green-600"
+          textColor="text-white"
+          hoverColor="hover:bg-green-700"
+        />
+      </div>
+    );
+
   return (
-    <>
+    <div className="w-11/12 mx-auto bg-white shadow-lg rounded-b-lg">
       {cart.map((item, index) => (
         <div
           key={index}
-          className="bg-zinc-100 px-5 border-t-2 border-b-2 flex w-full mt-1 justify-center"
+          className="flex flex-col lg:flex-row items-center justify-between border-b py-4 px-4 hover:bg-gray-50 transition-all"
         >
-          <div className="lg:flex lg:w-1/3 md:w-3/4 w-1/2">
-            <div className="relative rounded overflow-hidden lg:w-1/2 h-50 lg:h-30 p-2 flex items-center justify-center">
+          {/* Image + Title */}
+          <div className="flex items-center lg:w-1/3 w-full gap-4 mb-3 lg:mb-0">
+            <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-md overflow-hidden flex-shrink-0">
               <Image
                 src={item.image}
                 alt={item.name}
                 fill
-                className="object-cover transition-transform duration-300 ease-in-out"
+                className="object-cover transition-transform duration-300 hover:scale-105"
               />
             </div>
-            <h1 className="lg:w-1/2 p-2 font-semibold flex items-center border-r-2">
+            <span className="font-medium text-gray-800 text-sm sm:text-base">
               {item.name}
-            </h1>
+            </span>
           </div>
-          <div className="w-1/12 p-1 hidden lg:flex items-center justify-end border-r-2">
-            <h1 className="font-bold">{item.quantity}</h1>
+
+          {/* Responsive details for mobile */}
+          <div className="flex flex-col w-full gap-1 text-gray-700 text-sm sm:text-base lg:hidden">
+            <div className="flex justify-between">
+              <span>Size:</span>
+              <span className="font-medium">{item.size}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Price:</span>
+              {/* <span>Rs {item.price.toLocaleString()}</span> */}
+              <span>Rs {item.price?.toLocaleString() ?? 0}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Quantity:</span>
+              <span>{item.quantity}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Total:</span>
+              <span className="font-semibold">
+                Rs {(item.quantity * item.price).toLocaleString()}
+              </span>
+            </div>
           </div>
-          <div className="w-1/12 p-1 hidden lg:flex items-center justify-end border-r-2">
-            <h1>{item.price.toLocaleString()}</h1>
+
+          {/* For desktop layout */}
+          <div className="hidden lg:flex lg:w-1/12 justify-center font-semibold text-gray-700">
+            {item.quantity}
           </div>
-          <div className="w-1/6 p-1 flex flex-col md:flex items-center justify-center border-r-2">
-            <h1>{item.size}</h1>
-            <h1 className="md:hidden">
-              Rs: {(item.quantity * item.price).toLocaleString()}
-            </h1>
+          <div className="hidden lg:flex lg:w-1/12 justify-center text-gray-700">
+            Rs {item.price.toLocaleString()}
           </div>
-          <div className="w-1/6 p-1 hidden md:flex items-center justify-end border-r-2 font-bold">
-            Rs:{" "}
-            <h1 className="font-normal">
-              {" "}
-              {(item.quantity * item.price).toLocaleString()}
-            </h1>
+          <div className="hidden lg:flex lg:w-1/6 justify-center text-gray-700">
+            {item.size}
           </div>
-          <div className="w-1/6 p-1 flex flex-col items-center justify-center border-r-2">
+          <div className="hidden lg:flex lg:w-1/6 justify-center font-semibold text-gray-800">
+            Rs {(item.quantity * item.price).toLocaleString()}
+          </div>
+
+          {/* Delete Button */}
+          <div className="flex justify-end lg:justify-center mt-2 lg:mt-0 w-full lg:w-1/6">
             <button
               onClick={() => handleDelete(index)}
-              className="text-red-600 px-2 py-1 rounded hover:text-red-800"
+              className="text-red-600 hover:text-red-800 transition-colors"
+              title="Remove item"
             >
-              <LuTrash2 size={30} />
+              <LuTrash2 size={20} />
             </button>
           </div>
         </div>
       ))}
-    </>
+
+      {/* Cart Summary */}
+      <div className="flex flex-col sm:flex-row justify-between items-center px-6 py-6 border-t bg-gray-100 rounded-b-lg">
+        <h2 className="text-lg sm:text-xl font-semibold text-gray-800 mb-4 sm:mb-0">
+          Subtotal: Rs {subtotal.toLocaleString()}
+        </h2>
+        <Button
+          text="Proceed to Checkout"
+          size="lg"
+          textColor="text-white"
+          bgColor="bg-green-600"
+          hoverColor="hover:bg-green-700"
+          href="/checkout"
+          className="w-full sm:w-auto"
+        />
+      </div>
+    </div>
   );
 };
 

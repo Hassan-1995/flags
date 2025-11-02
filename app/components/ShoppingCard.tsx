@@ -24,14 +24,14 @@ const ShoppingCard = ({
 }: ShoppingCardProps) => {
   const formatPrice = () => {
     if (typeof price === "number") {
-      return `Rs: ${price.toLocaleString()}`;
+      return `Rs. ${price.toLocaleString()}`;
     } else {
-      return `Rs: ${price.min.toLocaleString()} – ${price.max.toLocaleString()}`;
+      return `Rs. ${price.min.toLocaleString()} – ${price.max.toLocaleString()}`;
     }
   };
 
   return (
-    <Card className="overflow-hidden m-4 hover:shadow-md hover:shadow-green-600 hover:scale-105 transition-all flex flex-col">
+    <Card className="overflow-hidden group bg-white rounded-2xl border border-green-100 shadow-md shadow-green-100 hover:shadow-lg hover:shadow-green-200 transition-all duration-300 transform hover:-translate-y-1">
       <Link
         href={{
           pathname: href,
@@ -40,25 +40,35 @@ const ShoppingCard = ({
             imageSrc,
             description,
             price: typeof price === "number" ? price : JSON.stringify(price),
-            sizeOption: sizeOption,
+            sizeOption,
             worldFlag,
           },
         }}
-        className="flex flex-col flex-grow h-full"
+        className="flex flex-col h-full"
       >
-        <div className="relative h-[200px] overflow-hidden group">
+        {/* Image Section */}
+        <div className="relative h-[220px] overflow-hidden rounded-t-2xl">
           <Image
             src={imageSrc}
             alt={title}
             fill
-            className="object-cover transition-transform duration-300 ease-in-out"
+            className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
           />
         </div>
-        <CardContent className="flex flex-col flex-grow justify-between">
-          <p className="text-sm text-gray-700">{title}</p>
-          <h4 className="text-lg font-semibold text-green-600 mt-auto">
-            {formatPrice()}
-          </h4>
+
+        {/* Card Content */}
+        <CardContent className="flex flex-col flex-grow justify-between p-4">
+          <div>
+            <p className="text-base font-semibold text-gray-800">{title}</p>
+            <p className="text-sm text-gray-500 mt-1 line-clamp-2">
+              {description}
+            </p>
+          </div>
+          <div className="mt-3">
+            <span className="inline-block text-green-600 font-bold text-lg">
+              {formatPrice()}
+            </span>
+          </div>
         </CardContent>
       </Link>
     </Card>

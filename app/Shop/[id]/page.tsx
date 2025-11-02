@@ -42,10 +42,6 @@ const ProductDetailPage = () => {
     return null;
   }
 
-  // if (!localStorage.getItem("cart")) {
-  //   localStorage.setItem("cart", JSON.stringify([]));
-  // }
-
   const sizeOptionToUse =
     sizeOptionsMap[sizeOptionKey as keyof typeof sizeOptionsMap];
 
@@ -64,7 +60,6 @@ const ProductDetailPage = () => {
     setDimension(item.value);
   };
 
-  // let cart = JSON.parse(localStorage.getItem("cart") || "[]");
   const handleAddToCart = () => {
     setShowAdded(true);
 
@@ -90,14 +85,14 @@ const ProductDetailPage = () => {
     localStorage.setItem("cart", JSON.stringify(newCart));
     setCart(newCart);
 
-    console.log(newCart);
     setTimeout(() => setShowAdded(false), 3000);
   };
 
   return (
-    <div className="px-4 md:px-20 py-10 max-w-screen  bg-zinc-100">
-      <div className="flex flex-col lg:flex-row gap-10">
-        <div className="flex-shrink-0 lg:w-[50%]">
+    <div className="bg-gradient-to-b from-green-50 to-white py-12 px-4 md:px-5 min-h-screen">
+      <div className="w-full flex flex-col lg:flex-row gap-10 bg-white shadow-md rounded-3xl p-6 md:p-10">
+        {/* Image / Flag Section */}
+        <div className="flex-shrink-0 lg:w-[50%] flex justify-center items-center bg-gray-100 rounded-2xl overflow-hidden">
           {worldFlag === "true" ? (
             <ShowWorldFlag
               title={title!}
@@ -107,17 +102,25 @@ const ProductDetailPage = () => {
             <ShowPakistanFlag image={imageSrc!} title={title!} />
           )}
         </div>
+
+        {/* Product Info */}
         <div className="flex-1 space-y-6">
-          {/* <h1 className="text-2xl sm:text-3xl font-bold">{cart.name}</h1> */}
-          <h1 className="text-2xl sm:text-3xl font-bold">{title}</h1>
-          <p className="text-base sm:text-lg text-gray-700">{description}</p>
-          <p className="text-xl sm:text-2xl font-bold text-green-700">
-            Price:{" "}
+          <h1 className="text-3xl md:text-4xl font-extrabold text-green-700 leading-tight">
+            {title}
+          </h1>
+
+          <p className="text-gray-700 text-base md:text-lg leading-relaxed">
+            {description}
+          </p>
+
+          <p className="text-2xl md:text-3xl font-bold text-green-600">
             {typeof finalPrice === "object"
               ? `Rs. ${finalPrice.min} - Rs. ${finalPrice.max}`
               : `Rs. ${finalPrice}`}
           </p>
-          <hr className="border-t border-gray-300" />
+
+          <div className="border-t border-gray-300 my-4"></div>
+
           <div>
             <DropDownBox
               title={"Pick a Flag Size"}
@@ -125,36 +128,41 @@ const ProductDetailPage = () => {
               sendSize={handleSize}
             />
           </div>
-          <div className="flex flex-col items-end space-y-2 h-12 justify-center">
+
+          {/* Buy Now Section */}
+          <div className="relative flex flex-col items-end justify-center mt-8 h-16">
             <h1
-              className={`text-green-600 text-lg font-bold transition-opacity duration-300 ${
+              className={`text-green-600 text-xl font-bold transition-all duration-300 ${
                 showAdded ? "opacity-100 animate-bounce" : "opacity-0"
               }`}
             >
-              Added!
+              ✅ Added to Cart!
             </h1>
+
             <div
-              className={`${
+              className={`transition-opacity duration-300 ${
                 showAdded ? "opacity-0 pointer-events-none" : "opacity-100"
-              } transition-opacity duration-300 absolute`}
+              } absolute`}
             >
               <Button
                 text="Buy Now"
-                size="md"
                 textColor="text-white"
-                bgColor="bg-green-600"
-                hoverColor="hover:bg-zinc-400"
+                bgColor="bg-green-900"
+                hoverColor="hover:bg-white hover:text-green-900"
                 onClick={handleAddToCart}
               />
             </div>
           </div>
 
-          <hr className="border-t border-gray-300" />
-          <p className="text-sm sm:text-base text-slate-600 leading-loose">
-            ✅ 100% Original product <br />
-            💸 Cash on delivery available <br />
-            🔄 Easy return/exchange within 7 days
-          </p>
+          <div className="border-t border-gray-300 my-4"></div>
+
+          <div className="bg-green-50 p-4 rounded-xl">
+            <p className="text-sm sm:text-base text-slate-700 leading-loose">
+              ✅ 100% Original Product <br />
+              💸 Cash on Delivery Available <br />
+              🔄 Easy Returns & Exchanges within 7 Days
+            </p>
+          </div>
         </div>
       </div>
     </div>

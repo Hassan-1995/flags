@@ -19,17 +19,17 @@ const CallToAction = () => {
           <Button
             text="Shop Now"
             size="xl"
-            textColor="text-green-600"
-            bgColor="bg-white"
-            hoverColor="hover:bg-zinc-200"
+            textColor="text-green-900"
+            bgColor="bg-tranparent"
+            hoverColor="hover:bg-green-500 hover:text-white"
             href="/"
           />
           <Button
             text="Get a Quote"
             size="xl"
             textColor="text-white"
-            bgColor="bg-tranparent"
-            hoverColor="hover:bg-zinc-900"
+            bgColor="bg-green-900"
+            hoverColor="hover:bg-white hover:text-green-500"
             // onClick={() => alert("Extra Large clicked")}
             href="/"
           />
