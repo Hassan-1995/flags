@@ -93,6 +93,7 @@ const ProductsSection = () => {
             textColor="text-white"
             bgColor="bg-green-900"
             hoverColor="hover:bg-white hover:text-green-500"
+            href="/productsGallery"
           />
         </div>
       </div>

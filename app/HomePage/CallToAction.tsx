@@ -22,7 +22,7 @@ const CallToAction = () => {
             textColor="text-green-900"
             bgColor="bg-tranparent"
             hoverColor="hover:bg-green-500 hover:text-white"
-            href="/"
+            href="/Shop"
           />
           <Button
             text="Get a Quote"

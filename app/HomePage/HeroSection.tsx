@@ -31,7 +31,7 @@ const HeroSection = () => {
               textColor="text-white"
               bgColor="bg-green-900"
               hoverColor="hover:bg-white hover:text-green-500"
-              href="/"
+              href="/Shop"
             />
             <Button
               text="Get a Quote"
